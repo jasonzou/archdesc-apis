@@ -32,3 +32,11 @@ Archival descriptions Management System - APIs (go-zero)
     └── types                       // The struct of request and response is automatically generated according to the api, and editing is not recommended
         └── types.go
 ```
+
+## A to do list
+
+- check Omeka-s (site/settings etc.)
+- taxonomy apis
+- information object apis
+- static pages apis (??)
+- accession/deaccession apis
