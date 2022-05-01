@@ -3,6 +3,9 @@ Archival descriptions Management System - APIs (go-zero)
 
 ## go-zero APIs
 
+### Template 
+
+- https://go-zero.dev/en/api-grammar.html
 
 ### API directory structure
 
