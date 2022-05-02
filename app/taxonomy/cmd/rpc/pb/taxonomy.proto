@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option go_package = "./taxonomy";
+
+package taxonomy;
+
+message taxonomy{
+    int64 id = 1;
+    repeated string term= 2;
+}
+
+message reqTaxonomyId {
+    int64 id = 1;
+}
+
+message reqGetAll {
+}
+
+message respGetAll {
+    repeated taxonomy taxonomies = 1;
+}
+
+service taxonomies{
+    rpc get (reqTaxonomyId) returns (taxonomy);
+    rpc getAll (reqGetAll) returns (respGetAll);
+}

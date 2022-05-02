@@ -1,0 +1,35 @@
+syntax = "v1"
+
+info (
+	title: "taxonomy"
+	desc: "APIs for taxonomy"
+	author: "Jason Zou"
+	email: "jason.zou@gmail.com"
+)
+
+type request {
+	// TODO: add members here and delete this comment
+
+}
+
+type response {
+	// TODO: add members here and delete this comment
+}
+
+type reqTaxonomyId {
+	Id int64 `json:"id"`
+}
+
+type taxonomy {
+	Id   int64  `json:"id"`
+	Term string `json:"term"`
+}
+
+service taxonomy-api {
+	@handler GetTaxonomy
+	get /taxonomies/id/:taxonomyId(reqTaxonomyId) returns(taxonomy)
+	
+	@handler GetAllTaxonomies
+	get /taxonomies returns ([]taxonomy)
+	
+}

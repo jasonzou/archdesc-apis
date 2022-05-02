@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package api.v1;
+
+option go_package = "./goatom3";
+
+import "google/protobuf/timestamp.proto";
+
+message Term{
+    int32 id = 1;
+    google.protobuf.Timestamp time = 2;
+    string prefix = 3;
+    string suffix = 4;
+    string title = 5;
+    string url = 6;
+    string config = 7;
+    string operator = 8;
+}
+
+service TermServices{
+    rpc Add(Term) returns (AddTermResponse) {}
+    rpc Modify(Term) returns (ModifyTermResponse) {}
+    rpc Retrieve(RetrieveTermRequest) returns (Term) {}
+    rpc List(ListTermRequest) returns (Terms) {}
+}
+
+message ModifyTermResponse {
+    int32 id = 1;
+}
+
+message RetrieveTermRequest {
+    int32 id = 1;
+}
+
+message AddTermResponse{
+    int32 id = 1;
+}
+
+message ListTermRequest {
+    int32 offset = 1;
+}
+
+message Terms{
+    repeated Term terms = 1;
+}
+
+message TermQuery {
+	int32 offset = 1;
+}
+
