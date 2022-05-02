@@ -27,7 +27,7 @@ type taxonomy {
 
 service taxonomy-api {
 	@handler GetTaxonomy
-	get /taxonomies/id/:taxonomyId(reqTaxonomyId) returns(taxonomy)
+	get /taxonomies/:Id(reqTaxonomyId) returns(taxonomy)
 	
 	@handler GetAllTaxonomies
 	get /taxonomies returns ([]taxonomy)

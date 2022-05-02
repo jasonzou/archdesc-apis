@@ -24,10 +24,10 @@ func main() {
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
 	ctx := svc.NewServiceContext(c)
-	svr := server.NewUsersServer(ctx)
+	svr := server.NewTaxonomiesServer(ctx)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		taxonomy.RegisterUsersServer(grpcServer, svr)
+		taxonomy.RegisterTaxonomiesServer(grpcServer, svr)
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)
