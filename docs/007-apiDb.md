@@ -28,7 +28,6 @@
     ```
       DataSource: atom:hewlett1@tcp(localhost:3306)/atom?charset=utf8mb4
     ```
-    ```
 - api/internal/config/config.go
   - [add DB config info](https://github.com/jasonzou/archdesc-apis/blob/v0.0.7/app/taxonomy/cmd/api/internal/config/config.go#L9-L10)
 - api/internal/svc/servicecontext.go
