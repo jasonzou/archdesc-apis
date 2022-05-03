@@ -1,9 +1,6 @@
 package model
 
-import (
-	"github.com/zeromicro/go-zero/core/stores/cache"
-	"github.com/zeromicro/go-zero/core/stores/sqlx"
-)
+import "github.com/zeromicro/go-zero/core/stores/sqlx"
 
 var _ TaxonomyModel = (*customTaxonomyModel)(nil)
 
@@ -20,8 +17,8 @@ type (
 )
 
 // NewTaxonomyModel returns a model for the database table.
-func NewTaxonomyModel(conn sqlx.SqlConn, c cache.CacheConf) TaxonomyModel {
+func NewTaxonomyModel(conn sqlx.SqlConn) TaxonomyModel {
 	return &customTaxonomyModel{
-		defaultTaxonomyModel: newTaxonomyModel(conn, c),
+		defaultTaxonomyModel: newTaxonomyModel(conn),
 	}
 }

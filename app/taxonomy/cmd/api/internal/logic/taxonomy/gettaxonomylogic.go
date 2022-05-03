@@ -2,9 +2,11 @@ package taxonomy
 
 import (
 	"context"
+	"errors"
 
 	"archdesc-apis/app/taxonomy/cmd/api/internal/svc"
 	"archdesc-apis/app/taxonomy/cmd/api/internal/types"
+	"archdesc-apis/app/taxonomy/model"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -25,19 +27,19 @@ func NewGetTaxonomyLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetTa
 
 func (l *GetTaxonomyLogic) GetTaxonomy(req *types.ReqTaxonomyId) (resp *types.Taxonomy, err error) {
 	// todo: add your logic here and delete this line
-	m := map[int64]string{
-		1: "test",
-		2: "test2",
+	l.Logger.Error("dfjklksdflkjfdsklfd")
+	taxonomy, err := l.svcCtx.TaxonomyModel.FindOne(l.ctx, req.Id)
+	l.Logger.Error("------------------")
+	if err != nil && err != model.ErrNotFound {
+		return nil, errors.New("taxonomy not found")
 	}
 
-	nickname := "unknown"
-
-	if name, ok := m[req.Id]; ok {
-		nickname = name
+	if taxonomy == nil {
+		return nil, errors.New("this taxonomy does not exist")
 	}
 
 	return &types.Taxonomy{
-		Id:   req.Id,
-		Term: nickname,
+		Id:   taxonomy.Id,
+		Term: taxonomy.Usage.String,
 	}, nil
 }
