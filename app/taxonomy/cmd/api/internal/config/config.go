@@ -1,11 +1,14 @@
 package config
 
 import (
-  "github.com/zeromicro/go-zero/rest"
-  "github.com/zeromicro/go-zero/zrpc"
+	"github.com/zeromicro/go-zero/rest"
+	"github.com/zeromicro/go-zero/zrpc"
 )
 
 type Config struct {
 	rest.RestConf
-  TaxonomyRpcConf zrpc.RpcClientConf
+	TaxonomyRpcConf zrpc.RpcClientConf
+	DB              struct {
+		DataSource string
+	}
 }

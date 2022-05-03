@@ -4,6 +4,7 @@ package handler
 import (
 	"net/http"
 
+	taxonomy "archdesc-apis/app/taxonomy/cmd/api/internal/handler/taxonomy"
 	"archdesc-apis/app/taxonomy/cmd/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -13,14 +14,14 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		[]rest.Route{
 			{
-				Method:  http.MethodGet,
-				Path:    "/taxonomies/:Id",
-				Handler: GetTaxonomyHandler(serverCtx),
+				Method:  http.MethodPost,
+				Path:    "/taxonomies/info",
+				Handler: taxonomy.GetTaxonomyHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodGet,
+				Method:  http.MethodPost,
 				Path:    "/taxonomies",
-				Handler: GetAllTaxonomiesHandler(serverCtx),
+				Handler: taxonomy.GetAllTaxonomiesHandler(serverCtx),
 			},
 		},
 	)

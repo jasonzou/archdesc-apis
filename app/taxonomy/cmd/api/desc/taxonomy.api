@@ -7,29 +7,33 @@ info (
 	email: "jason.zou@gmail.com"
 )
 
-type request {
-	// TODO: add members here and delete this comment
-
-}
-
-type response {
-	// TODO: add members here and delete this comment
-}
-
-type reqTaxonomyId {
-	Id int64 `json:"id"`
-}
-
-type taxonomy {
+// The types defined below go into internal/types/types.go
+type Taxonomy {
 	Id   int64  `json:"id"`
 	Term string `json:"term"`
 }
 
+type TaxonomyListResp {
+	List []Taxonomy `json:"list"`
+}
+
+type ReqTaxonomyId {
+	Id int64 `json:"id"`
+}
+
+// service block
+@server(
+	group: taxonomy
+)
+
 service taxonomy-api {
+	// internal/handler/GetTaxonomyhandler.go
+	@doc "Get a taxonomy name"
 	@handler GetTaxonomy
-	get /taxonomies/:Id(reqTaxonomyId) returns(taxonomy)
+	post /taxonomies/info (ReqTaxonomyId) returns(Taxonomy)
 	
+	// internal/handler/GetAllTaxonomieshandler.go
+	@doc "Get names of all taxonomies"
 	@handler GetAllTaxonomies
-	get /taxonomies returns ([]taxonomy)
-	
+	post /taxonomies returns (TaxonomyListResp)
 }
