@@ -1,9 +1,3 @@
 Name: taxonomy-api
 Host: 0.0.0.0
 Port: 18888
-
-TaxonomyRpcConf:
-  Endpoints:
-    - 127.0.0.1:19999
-DB:
-  DataSource: root:hewlett1@tcp(mysql:3306)/atom?charset=utf8mb4
