@@ -29,10 +29,8 @@
       DataSource: atom:hewlett1@tcp(localhost:3306)/atom?charset=utf8mb4
     ```
     ```
-
-    ```
 - api/internal/config/config.go
   - [add DB config info](https://github.com/jasonzou/archdesc-apis/blob/v0.0.7/app/taxonomy/cmd/api/internal/config/config.go#L9-L10)
 - api/internal/svc/servicecontext.go
-  - [change type ServiceContext](https://github.com/jasonzou/archdesc-apis/blob/9965a59dca51ef0c50bc7285cf3ec64cadbce79b/app/taxonomy/cmd/api/internal/svc/servicecontext.go#L12)
-  - [change func NewServiceContext](https://github.com/jasonzou/archdesc-apis/blob/9965a59dca51ef0c50bc7285cf3ec64cadbce79b/app/taxonomy/cmd/api/internal/svc/servicecontext.go#L18)
+  - [change type ServiceContext](https://github.com/jasonzou/archdesc-apis/blob/v0.0.7/app/taxonomy/cmd/api/internal/svc/servicecontext.go#L12)
+  - [change func NewServiceContext](https://github.com/jasonzou/archdesc-apis/blob/v0.0.7/app/taxonomy/cmd/api/internal/svc/servicecontext.go#L18)
