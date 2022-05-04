@@ -35,8 +35,13 @@ Archival descriptions Management System - APIs (go-zero)
 
 ## A to do list
 
-- check Omeka-s (site/settings etc.)
-- taxonomy apis
+- terms of a taxonomy apis 
 - information object apis
-- static pages apis (??)
 - accession/deaccession apis
+- static pages apis - 
+
+## Things to consider
+
+- check Omeka-s (site/settings etc.)  - checked. Site is a better implementation to encapsulate a public interface (static pages, theme)
+- taxonomy apis (getTaxonomy/getAllTaxonomy)
+- country code/AtoM 2 taxonomy code
