@@ -33,3 +33,5 @@
 - api/internal/svc/servicecontext.go
   - [change type ServiceContext](https://github.com/jasonzou/archdesc-apis/blob/v0.0.7/app/taxonomy/cmd/api/internal/svc/servicecontext.go#L12)
   - [change func NewServiceContext](https://github.com/jasonzou/archdesc-apis/blob/v0.0.7/app/taxonomy/cmd/api/internal/svc/servicecontext.go#L18)
+- model/xxxModel.go
+  - customize the default model by extending the interface

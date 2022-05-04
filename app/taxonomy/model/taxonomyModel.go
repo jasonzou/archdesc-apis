@@ -1,6 +1,12 @@
 package model
 
-import "github.com/zeromicro/go-zero/core/stores/sqlx"
+import (
+	"context"
+	"fmt"
+
+	"github.com/zeromicro/go-zero/core/stores/sqlc"
+	"github.com/zeromicro/go-zero/core/stores/sqlx"
+)
 
 var _ TaxonomyModel = (*customTaxonomyModel)(nil)
 
@@ -9,6 +15,7 @@ type (
 	// and implement the added methods in customTaxonomyModel.
 	TaxonomyModel interface {
 		taxonomyModel
+		FindAll(ctx context.Context) ([]*Taxonomy, error)
 	}
 
 	customTaxonomyModel struct {
@@ -20,5 +27,20 @@ type (
 func NewTaxonomyModel(conn sqlx.SqlConn) TaxonomyModel {
 	return &customTaxonomyModel{
 		defaultTaxonomyModel: newTaxonomyModel(conn),
+	}
+}
+
+func (m *defaultTaxonomyModel) FindAll(ctx context.Context) ([]*Taxonomy, error) {
+	query := fmt.Sprintf("select %s from %s", taxonomyRows, m.table)
+	var resp []*Taxonomy
+	err := m.conn.QueryRowsCtx(ctx, &resp, query)
+
+	switch err {
+	case nil:
+		return resp, nil
+	case sqlc.ErrNotFound:
+		return nil, ErrNotFound
+	default:
+		return nil, err
 	}
 }
