@@ -1,15 +1,17 @@
 # archdesc-apis
-Archival descriptions Management System - APIs (go-zero)
+
+A step by step approach to learn [go-zero](https://github.com/zeromicro/go-zero) via watching [tutorial videos](https://space.bilibili.com/389552232/video) and studying [the code](https://github.com/Mikaelemmmm/go-zero-looklook). A small portion of an archival descriptions management system is building along the learning process. 
 
 ## go-zero APIs
 
-### Template 
+### Template
 
 - https://go-zero.dev/en/api-grammar.html
 
 ### API directory structure
 
 - (source: https://go-zero.dev/en/api-dir.html )
+
 ```
 .
 ├── etc
@@ -17,7 +19,7 @@ Archival descriptions Management System - APIs (go-zero)
 ├── go.mod                          // go module file
 ├── greet.api                       // api interface description language file
 ├── greet.go                        // main function entry
-└── internal                        
+└── internal                      
     ├── config  
     │   └── config.go               // configuration declaration type
     ├── handler                     // routing and handler forwarding
@@ -35,10 +37,10 @@ Archival descriptions Management System - APIs (go-zero)
 
 ## A to do list
 
-- terms of a taxonomy apis 
+- terms of a taxonomy apis
 - information object apis
 - accession/deaccession apis
-- static pages apis - 
+- static pages apis -
 
 ## Things to consider
 
