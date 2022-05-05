@@ -26,10 +26,9 @@ func NewGetTaxonomyLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetTa
 }
 
 func (l *GetTaxonomyLogic) GetTaxonomy(req *types.ReqTaxonomyId) (resp *types.Taxonomy, err error) {
-	// todo: add your logic here and delete this line
-	l.Logger.Error("dfjklksdflkjfdsklfd")
+	l.Logger.Error("-------- 1 ----------")
 	taxonomy, err := l.svcCtx.TaxonomyModel.FindOne(l.ctx, req.Id)
-	l.Logger.Error("------------------")
+	l.Logger.Error("-------- 2 ----------")
 	if err != nil && err != model.ErrNotFound {
 		return nil, errors.New("taxonomy not found")
 	}

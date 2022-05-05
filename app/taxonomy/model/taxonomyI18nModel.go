@@ -1,8 +1,8 @@
 package model
 
 import (
-  "github.com/zeromicro/go-zero/core/stores/sqlx"
-  "github.com/zeromicro/go-zero/core/stores/cache"
+	"github.com/zeromicro/go-zero/core/stores/cache"
+	"github.com/zeromicro/go-zero/core/stores/sqlx"
 )
 
 var _ TaxonomyI18nModel = (*customTaxonomyI18nModel)(nil)

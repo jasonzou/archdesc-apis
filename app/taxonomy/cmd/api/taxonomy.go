@@ -7,6 +7,7 @@ import (
 	"archdesc-apis/app/taxonomy/cmd/api/internal/config"
 	"archdesc-apis/app/taxonomy/cmd/api/internal/handler"
 	"archdesc-apis/app/taxonomy/cmd/api/internal/svc"
+	"archdesc-apis/common/middleware"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"
@@ -23,6 +24,8 @@ func main() {
 	ctx := svc.NewServiceContext(c)
 	server := rest.MustNewServer(c.RestConf)
 	defer server.Stop()
+
+	server.Use(middleware.NewGlobalMiddleware("Jason").Handle)
 
 	handler.RegisterHandlers(server, ctx)
 

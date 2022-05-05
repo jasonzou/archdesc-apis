@@ -27,10 +27,9 @@ func NewGetAllTaxonomiesLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 func (l *GetAllTaxonomiesLogic) GetAllTaxonomies() (resp *types.TaxonomyListResp, err error) {
-	// todo: add your logic here and delete this line
-	l.Logger.Error("----------dfjklksdflkjfdsklfd")
+	l.Logger.Error("---------- 1 ------------")
 	taxList, err := l.svcCtx.TaxonomyModel.FindAll(l.ctx)
-	l.Logger.Error("------------------")
+	l.Logger.Error("---------- 2 ------------")
 	if err != nil && err != model.ErrNotFound {
 		l.Logger.Error(err.Error())
 		return nil, errors.New("taxonomy list not found")

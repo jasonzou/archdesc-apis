@@ -24,6 +24,7 @@ type ReqTaxonomyId {
 // service block
 @server(
 	group: taxonomy
+	middleware: TaxonomyMiddleware
 )
 
 service taxonomy-api {

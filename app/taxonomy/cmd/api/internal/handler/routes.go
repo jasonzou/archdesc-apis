@@ -12,17 +12,20 @@ import (
 
 func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodPost,
-				Path:    "/taxonomies/info",
-				Handler: taxonomy.GetTaxonomyHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/taxonomies",
-				Handler: taxonomy.GetAllTaxonomiesHandler(serverCtx),
-			},
-		},
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.TaxonomyMiddleware},
+			[]rest.Route{
+				{
+					Method:  http.MethodPost,
+					Path:    "/taxonomies/info",
+					Handler: taxonomy.GetTaxonomyHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/taxonomies",
+					Handler: taxonomy.GetAllTaxonomiesHandler(serverCtx),
+				},
+			}...,
+		),
 	)
 }
