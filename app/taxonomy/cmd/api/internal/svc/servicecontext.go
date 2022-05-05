@@ -16,7 +16,7 @@ type ServiceContext struct {
 func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
 		Config:            c,
-		TaxonomyModel:     model.NewTaxonomyModel(sqlx.NewMysql(c.DB.DataSource)),
-		TaxonomyI18nModel: model.NewTaxonomyI18nModel(sqlx.NewMysql(c.DB.DataSource)),
+		TaxonomyModel:     model.NewTaxonomyModel(sqlx.NewMysql(c.DB.DataSource), c.CacheRedis),
+		TaxonomyI18nModel: model.NewTaxonomyI18nModel(sqlx.NewMysql(c.DB.DataSource), c.CacheRedis),
 	}
 }

@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 )
@@ -25,16 +24,16 @@ type (
 )
 
 // NewTaxonomyModel returns a model for the database table.
-func NewTaxonomyModel(conn sqlx.SqlConn, c cache.CacheConf) TaxonomyModel {
+func NewTaxonomyModel(conn sqlx.SqlConn) TaxonomyModel {
 	return &customTaxonomyModel{
-		defaultTaxonomyModel: newTaxonomyModel(conn, c),
+		defaultTaxonomyModel: newTaxonomyModel(conn),
 	}
 }
 
 func (m *defaultTaxonomyModel) FindAll(ctx context.Context) ([]*Taxonomy, error) {
 	query := fmt.Sprintf("select %s from %s", taxonomyRows, m.table)
 	var resp []*Taxonomy
-	err := m.CachedConn.QueryRowsNoCacheCtx(ctx, &resp, query)
+	err := m.conn.QueryRowsCtx(ctx, &resp, query)
 
 	switch err {
 	case nil:

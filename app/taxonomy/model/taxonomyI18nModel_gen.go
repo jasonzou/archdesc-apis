@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
+	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"github.com/zeromicro/go-zero/core/stringx"
@@ -19,6 +20,8 @@ var (
 	taxonomyI18nRows                = strings.Join(taxonomyI18nFieldNames, ",")
 	taxonomyI18nRowsExpectAutoSet   = strings.Join(stringx.Remove(taxonomyI18nFieldNames, "`id`", "`create_time`", "`update_time`"), ",")
 	taxonomyI18nRowsWithPlaceHolder = strings.Join(stringx.Remove(taxonomyI18nFieldNames, "`id`", "`create_time`", "`update_time`"), "=?,") + "=?"
+
+	cacheTaxonomyI18nIdPrefix = "cache:taxonomyI18n:id:"
 )
 
 type (
@@ -30,7 +33,7 @@ type (
 	}
 
 	defaultTaxonomyI18nModel struct {
-		conn  sqlx.SqlConn
+		sqlc.CachedConn
 		table string
 	}
 
@@ -42,23 +45,29 @@ type (
 	}
 )
 
-func newTaxonomyI18nModel(conn sqlx.SqlConn) *defaultTaxonomyI18nModel {
+func newTaxonomyI18nModel(conn sqlx.SqlConn, c cache.CacheConf) *defaultTaxonomyI18nModel {
 	return &defaultTaxonomyI18nModel{
-		conn:  conn,
-		table: "`taxonomy_i18n`",
+		CachedConn: sqlc.NewConn(conn, c),
+		table:      "`taxonomy_i18n`",
 	}
 }
 
 func (m *defaultTaxonomyI18nModel) Insert(ctx context.Context, data *TaxonomyI18n) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?)", m.table, taxonomyI18nRowsExpectAutoSet)
-	ret, err := m.conn.ExecCtx(ctx, query, data.Name, data.Note, data.Culture)
+	taxonomyI18nIdKey := fmt.Sprintf("%s%v", cacheTaxonomyI18nIdPrefix, data.Id)
+	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?)", m.table, taxonomyI18nRowsExpectAutoSet)
+		return conn.ExecCtx(ctx, query, data.Name, data.Note, data.Culture)
+	}, taxonomyI18nIdKey)
 	return ret, err
 }
 
 func (m *defaultTaxonomyI18nModel) FindOne(ctx context.Context, id int64) (*TaxonomyI18n, error) {
-	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", taxonomyI18nRows, m.table)
+	taxonomyI18nIdKey := fmt.Sprintf("%s%v", cacheTaxonomyI18nIdPrefix, id)
 	var resp TaxonomyI18n
-	err := m.conn.QueryRowCtx(ctx, &resp, query, id)
+	err := m.QueryRowCtx(ctx, &resp, taxonomyI18nIdKey, func(ctx context.Context, conn sqlx.SqlConn, v interface{}) error {
+		query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", taxonomyI18nRows, m.table)
+		return conn.QueryRowCtx(ctx, v, query, id)
+	})
 	switch err {
 	case nil:
 		return &resp, nil
@@ -70,15 +79,30 @@ func (m *defaultTaxonomyI18nModel) FindOne(ctx context.Context, id int64) (*Taxo
 }
 
 func (m *defaultTaxonomyI18nModel) Update(ctx context.Context, data *TaxonomyI18n) error {
-	query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, taxonomyI18nRowsWithPlaceHolder)
-	_, err := m.conn.ExecCtx(ctx, query, data.Name, data.Note, data.Culture, data.Id)
+	taxonomyI18nIdKey := fmt.Sprintf("%s%v", cacheTaxonomyI18nIdPrefix, data.Id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, taxonomyI18nRowsWithPlaceHolder)
+		return conn.ExecCtx(ctx, query, data.Name, data.Note, data.Culture, data.Id)
+	}, taxonomyI18nIdKey)
 	return err
 }
 
 func (m *defaultTaxonomyI18nModel) Delete(ctx context.Context, id int64) error {
-	query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
-	_, err := m.conn.ExecCtx(ctx, query, id)
+	taxonomyI18nIdKey := fmt.Sprintf("%s%v", cacheTaxonomyI18nIdPrefix, id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+		return conn.ExecCtx(ctx, query, id)
+	}, taxonomyI18nIdKey)
 	return err
+}
+
+func (m *defaultTaxonomyI18nModel) formatPrimary(primary interface{}) string {
+	return fmt.Sprintf("%s%v", cacheTaxonomyI18nIdPrefix, primary)
+}
+
+func (m *defaultTaxonomyI18nModel) queryPrimary(ctx context.Context, conn sqlx.SqlConn, v, primary interface{}) error {
+	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", taxonomyI18nRows, m.table)
+	return conn.QueryRowCtx(ctx, v, query, primary)
 }
 
 func (m *defaultTaxonomyI18nModel) tableName() string {
