@@ -27,6 +27,7 @@ func NewGetAllTaxonomiesLogic(ctx context.Context, svcCtx *svc.ServiceContext) *
 }
 
 func (l *GetAllTaxonomiesLogic) GetAllTaxonomies() (resp *types.TaxonomyListResp, err error) {
+	logx.Info("hello get all taxonomies")
 	l.Logger.Error("---------- 1 ------------")
 	taxList, err := l.svcCtx.TaxonomyModel.FindAll(l.ctx)
 	l.Logger.Error("---------- 2 ------------")

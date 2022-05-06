@@ -9,3 +9,9 @@ CacheRedis:
   - Host: 127.0.0.1:36379
     Pass: G62m50oigInC30sf
     Type: node
+
+Log:
+  ServiceName: taxonomy-api
+  Encoding: plain
+  Mode: console
+  Level: info
