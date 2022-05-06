@@ -7,7 +7,7 @@ import (
 	"archdesc-apis/app/taxonomy/cmd/rpc/internal/config"
 	"archdesc-apis/app/taxonomy/cmd/rpc/internal/server"
 	"archdesc-apis/app/taxonomy/cmd/rpc/internal/svc"
-	"archdesc-apis/app/taxonomy/cmd/rpc/pb/taxonomy"
+	"archdesc-apis/app/taxonomy/cmd/rpc/pb/taxonomyservice"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"
@@ -16,7 +16,7 @@ import (
 	"google.golang.org/grpc/reflection"
 )
 
-var configFile = flag.String("f", "etc/taxonomy.yaml", "the config file")
+var configFile = flag.String("f", "etc/taxonomyservice.yaml", "the config file")
 
 func main() {
 	flag.Parse()
@@ -24,10 +24,10 @@ func main() {
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
 	ctx := svc.NewServiceContext(c)
-	svr := server.NewTaxonomiesServer(ctx)
+	svr := server.NewTaxonomyServiceServer(ctx)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
-		taxonomy.RegisterTaxonomiesServer(grpcServer, svr)
+		taxonomyservice.RegisterTaxonomyServiceServer(grpcServer, svr)
 
 		if c.Mode == service.DevMode || c.Mode == service.TestMode {
 			reflection.Register(grpcServer)

@@ -1,4 +1,4 @@
 #!/bin/bash
 pushd rpc
-go run taxonomy.go -f etc/taxonomy.yaml &
+go run taxonomyservice.go -f etc/taxonomyservice.yaml &
 popd

@@ -1,4 +1,4 @@
-Name: taxonomy.rpc
+Name: taxonomyservice.rpc
 ListenOn: 0.0.0.0:19999
 Mode: dev
   #Etcd:

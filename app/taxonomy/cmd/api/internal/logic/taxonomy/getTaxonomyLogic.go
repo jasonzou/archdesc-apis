@@ -30,6 +30,7 @@ func (l *GetTaxonomyLogic) GetTaxonomy(req *types.ReqTaxonomyId) (resp *types.Ta
 	taxonomy, err := l.svcCtx.TaxonomyModel.FindOne(l.ctx, req.Id)
 	l.Logger.Error("-------- 2 ----------")
 	if err != nil && err != model.ErrNotFound {
+		logx.Errorf(err.Error())
 		return nil, errors.New("taxonomy not found")
 	}
 
