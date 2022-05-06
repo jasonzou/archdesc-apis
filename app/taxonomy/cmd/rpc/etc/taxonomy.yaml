@@ -1,5 +1,5 @@
 Name: taxonomy.rpc
-ListenOn: 127.0.0.1:19999
+ListenOn: 0.0.0.0:19999
 Mode: dev
   #Etcd:
   #Hosts:

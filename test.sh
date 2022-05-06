@@ -7,8 +7,8 @@ grpcurl -plaintext localhost:19999 describe
 
 echo "=== Test Retrieve Descriptions ==="
 
-grpcurl -plaintext -d '{ "id": 1 }' localhost:18888 api.v1.EntryServices/Retrieve 
+grpcurl -vv -plaintext -d '{ "id": 12 }' localhost:19999 taxonomy.taxonomies/get 
 
 echo "=== Test List ==="
 
-grpcurl -plaintext localhost:18888 api.v1.EntryServices/List 
+grpcurl -plaintext localhost:19999 taxonomy.taxonomies/getAll
