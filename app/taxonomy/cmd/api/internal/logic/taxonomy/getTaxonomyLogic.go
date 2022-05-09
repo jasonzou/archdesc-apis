@@ -32,9 +32,12 @@ func (l *GetTaxonomyLogic) GetTaxonomy(req *types.ReqTaxonomyId) (resp *types.Ta
 		return nil, errors.New("errorrrrrrrrrrrrrrrrrrrr")
 	}
 
+	var t []string
+	t = taxonomyResp.Term
+
 	return &types.Taxonomy{
 		Id:   taxonomyResp.Id,
-		Term: "hello",
+		Term: t[0],
 	}, nil
 	/*
 		l.Logger.Error("-------- 1 ----------")

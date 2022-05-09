@@ -2,9 +2,14 @@ Name: taxonomy-api
 Host: 0.0.0.0
 Port: 18888
 
+#//TaxonomyRpcConf:
+#  Endpoints:
+#    - 127.0.0.1:19999
 TaxonomyRpcConf:
-  Endpoints:
-    - 127.0.0.1:19999
+  Etcd: 
+    Hosts:
+    - 127.0.0.1:2379
+    Key: taxonomyservice.rpc
 
 Log:
   ServiceName: taxonomy-api

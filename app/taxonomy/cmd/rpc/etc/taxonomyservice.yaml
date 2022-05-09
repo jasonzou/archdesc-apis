@@ -1,10 +1,12 @@
 Name: taxonomyservice.rpc
 ListenOn: 0.0.0.0:19999
 Mode: dev
-  #Etcd:
-  #Hosts:
-  #- 127.0.0.1:2379
-  #Key: taxonomy.rpc
+
+Etcd:
+  Hosts:
+  - 127.0.0.1:2379
+  Key: taxonomyservice.rpc
+
 DB:
   DataSource: atom:hewlett1@tcp(localhost:3306)/atom?charset=utf8mb4
 
