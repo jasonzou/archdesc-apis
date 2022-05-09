@@ -7,6 +7,7 @@ import (
 	"archdesc-apis/app/taxonomy/cmd/api/internal/types"
 	"archdesc-apis/app/taxonomy/cmd/rpc/pb/taxonomyservice"
 
+	"github.com/jinzhu/copier"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -29,10 +30,16 @@ func (l *GetAllTaxonomiesLogic) GetAllTaxonomies() (resp *types.TaxonomyListResp
 	if err != nil {
 		return nil, err
 	}
-	for _, taxonomy := range taxonomyResp.Taxonomies {
-		logx.Info(taxonomy)
+	var listTaxonmoy []types.Taxonomy
+	for _, tempTax := range taxonomyResp.Taxonomies {
+		logx.Info(tempTax)
+		var t types.Taxonomy
+		_ = copier.Copy(&t, tempTax)
+		listTaxonmoy = append(listTaxonmoy, t)
 	}
 
-	return &types.TaxonomyListResp{}, nil
+	return &types.TaxonomyListResp{
+		List: listTaxonmoy,
+	}, nil
 
 }
