@@ -3,9 +3,10 @@ module archdesc-apis
 go 1.17
 
 require (
+	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/jinzhu/copier v0.3.5
 	github.com/zeromicro/go-zero v1.3.3
-	google.golang.org/grpc v1.46.0
+	google.golang.org/grpc v1.46.2
 	google.golang.org/protobuf v1.28.0
 )
 
@@ -16,7 +17,7 @@ require (
 	github.com/coreos/go-systemd/v22 v22.3.2 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
-	github.com/go-logr/logr v1.2.2 // indirect
+	github.com/go-logr/logr v1.2.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-redis/redis/v8 v8.11.4 // indirect
 	github.com/go-sql-driver/mysql v1.6.0 // indirect
@@ -24,7 +25,7 @@ require (
 	github.com/golang-jwt/jwt/v4 v4.2.0 // indirect
 	github.com/golang/mock v1.6.0 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
-	github.com/google/go-cmp v0.5.6 // indirect
+	github.com/google/go-cmp v0.5.7 // indirect
 	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/googleapis/gnostic v0.4.1 // indirect
@@ -43,19 +44,19 @@ require (
 	go.etcd.io/etcd/api/v3 v3.5.2 // indirect
 	go.etcd.io/etcd/client/pkg/v3 v3.5.2 // indirect
 	go.etcd.io/etcd/client/v3 v3.5.2 // indirect
-	go.opentelemetry.io/otel v1.3.0 // indirect
-	go.opentelemetry.io/otel/exporters/jaeger v1.3.0 // indirect
-	go.opentelemetry.io/otel/exporters/zipkin v1.3.0 // indirect
-	go.opentelemetry.io/otel/sdk v1.3.0 // indirect
-	go.opentelemetry.io/otel/trace v1.3.0 // indirect
+	go.opentelemetry.io/otel v1.7.0 // indirect
+	go.opentelemetry.io/otel/exporters/jaeger v1.7.0 // indirect
+	go.opentelemetry.io/otel/exporters/zipkin v1.7.0 // indirect
+	go.opentelemetry.io/otel/sdk v1.7.0 // indirect
+	go.opentelemetry.io/otel/trace v1.7.0 // indirect
 	go.uber.org/atomic v1.9.0 // indirect
-	go.uber.org/automaxprocs v1.4.0 // indirect
+	go.uber.org/automaxprocs v1.5.1 // indirect
 	go.uber.org/multierr v1.8.0 // indirect
 	go.uber.org/zap v1.21.0 // indirect
 	golang.org/x/crypto v0.0.0-20210920023735-84f357641f63 // indirect
 	golang.org/x/net v0.0.0-20220421235706-1d1ef9303861 // indirect
 	golang.org/x/oauth2 v0.0.0-20210819190943-2bc19b11175f // indirect
-	golang.org/x/sys v0.0.0-20220422013727-9388b58f7150 // indirect
+	golang.org/x/sys v0.0.0-20220513210249-45d2b4557a2a // indirect
 	golang.org/x/term v0.0.0-20210927222741-03fcf44c2211 // indirect
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/time v0.0.0-20211116232009-f0f3c7e86c11 // indirect

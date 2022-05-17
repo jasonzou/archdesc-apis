@@ -7,9 +7,9 @@ import (
 
 type Config struct {
 	rest.RestConf
-	TaxonomyRpcConf zrpc.RpcClientConf
-	Auth            struct {
+	Auth struct {
 		AccessSecret string
 		AccessExpire int64
 	}
+	UserRpcConf zrpc.RpcClientConf
 }

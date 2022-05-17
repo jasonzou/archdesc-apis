@@ -1,0 +1,31 @@
+type (
+	// user login
+	LoginRequest {
+		Username string `json:"username"`
+		Password string `json:"password"`
+	}
+	LoginResponse {
+		AccessToken  string `json:"accessToken"`
+		AccessExpire int64  `json:"accessExpire"`
+	}
+
+	// user information
+	UserInfoResponse {
+		Id   int64  `json:"id"`
+		Name string `json:"name"`
+		Role string `json:"role"`
+	}
+)
+
+service User {
+	@handler Login
+	post /api/user/login (LoginRequest) returns (LoginResponse)
+}
+
+@server(
+	jwt: Auth
+)
+service User {
+	@handler UserInfo
+	post /api/user/userinfo  returns (UserInfoResponse)
+}

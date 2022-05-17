@@ -25,14 +25,18 @@ type ReqTaxonomyId {
 @server(
 	group: taxonomy
 	middleware: TaxonomyMiddleware
+	jwt: Auth
 )
-
+// with jwt
 service taxonomy-api {
 	// internal/handler/GetTaxonomyhandler.go
 	@doc "Get a taxonomy name"
 	@handler GetTaxonomy
 	post /taxonomies/info (ReqTaxonomyId) returns(Taxonomy)
-	
+}
+
+// without jwt
+service taxonomy-api {
 	// internal/handler/GetAllTaxonomieshandler.go
 	@doc "Get names of all taxonomies"
 	@handler GetAllTaxonomies

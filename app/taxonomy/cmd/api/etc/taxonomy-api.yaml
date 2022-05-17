@@ -16,3 +16,7 @@ Log:
   Encoding: plain
   Mode: console
   Level: info
+
+Auth:
+  AccessSecret: uOvKLmVfztaXGpNYd4Z0I1SiT7MweJhl
+  AccessExpire: 86400

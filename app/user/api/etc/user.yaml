@@ -1,0 +1,11 @@
+Name: User
+Host: 0.0.0.0
+Port: 18888
+
+Auth:
+  AccessSecret: uOvKLmVfztaXGpNYd4Z0I1SiT7MweJhl
+  AccessExpire: 86400
+
+UserRpcConf:
+  Endpoints:
+    - 127.0.0.1:19999

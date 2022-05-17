@@ -1,5 +1,7 @@
 # Version History
 
+- [0.1.7](https://github.com/jasonzou/archdesc-apis/tree/v0.1.7) - [2022.05.17] - [jwt](https://github.com/jasonzou/archdesc-apis/blob/v0.1.7/docs/017-jwt.md)
+- [0.1.6](https://github.com/jasonzou/archdesc-apis/tree/v0.1.6) - [2022.05.17] - [interceptor](https://github.com/jasonzou/archdesc-apis/blob/v0.1.6/docs/016-interceptor.md)
 - [0.1.5](https://github.com/jasonzou/archdesc-apis/tree/v0.1.5) - [2022.05.09] - [rpc-api-db-etcd](https://github.com/jasonzou/archdesc-apis/blob/v0.1.5/docs/015-rpc-api-etcd.md)
 - [0.1.4](https://github.com/jasonzou/archdesc-apis/tree/v0.1.4) - [2022.05.08] - [rpc-api-db](https://github.com/jasonzou/archdesc-apis/blob/v0.1.4/docs/014-rpc-api-etcd.md)
 - [0.1.3](https://github.com/jasonzou/archdesc-apis/tree/v0.1.3) - [2022.05.06] - [rpc-api](https://github.com/jasonzou/archdesc-apis/blob/v0.1.3/docs/013-rpc-api.md)
