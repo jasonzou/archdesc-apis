@@ -6,6 +6,7 @@ import (
 
 	"archdesc-apis/app/user/api/internal/svc"
 	"archdesc-apis/app/user/api/internal/types"
+	"archdesc-apis/app/user/rpc/user"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -25,7 +26,7 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 }
 
 func (l *LoginLogic) Login(req *types.LoginRequest) (resp *types.LoginResponse, err error) {
-	res, err := l.svcCtx.UserRpc.Login(l.ctx, &user.LoginRequest{
+	res, err := l.svcCtx.Login(l.ctx, &user.LoginRequest{
 		Mobile:   req.Username,
 		Password: req.Password,
 	})
