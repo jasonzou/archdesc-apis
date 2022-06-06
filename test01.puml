@@ -1,0 +1,36 @@
+@startjson
+{
+   "title":"Canada Commons",
+   "url":"https://canadacommons.ca",
+   "prefix": [""],
+   "surffix": [""],
+   "config": ["HJ canadacommons.ca", "DJ  canadacommons.ca"]
+}
+@endjson
+
+@startuml
+entity Stanza{
+  + id (PK)
+  --
+  * title: text
+  * url: text
+  * config: text
+  prefix: text
+  surffix: text
+  time: date
+}
+
+entity SpecialHeader{
+  + id (PK)
+  --
+  * header: text
+  time: date
+}
+
+
+object User
+object JsApp
+object ApiServices
+
+JsApp => ApiServices : Get
+@enduml

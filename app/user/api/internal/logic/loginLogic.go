@@ -4,6 +4,7 @@ import (
 	"context"
 	"time"
 
+	"archdesc-apis/app/common/jwtx"
 	"archdesc-apis/app/user/api/internal/svc"
 	"archdesc-apis/app/user/api/internal/types"
 	"archdesc-apis/app/user/rpc/user"
@@ -26,14 +27,13 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 }
 
 func (l *LoginLogic) Login(req *types.LoginRequest) (resp *types.LoginResponse, err error) {
-	res, err := l.svcCtx.Login(l.ctx, &user.LoginRequest{
-		Mobile:   req.Username,
+	res, err := l.svcCtx.UserRpcClient.Login(l.ctx, &user.LoginRequest{
+		Username: req.Username,
 		Password: req.Password,
 	})
 	if err != nil {
 		return nil, err
 	}
-
 	now := time.Now().Unix()
 	accessExpire := l.svcCtx.Config.Auth.AccessExpire
 
